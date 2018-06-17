@@ -1,0 +1,49 @@
+{
+    "app-id": "com.parsecgaming.parsec",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.6",
+    "sdk": "org.freedesktop.Sdk",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.26",
+    "sdk": "org.gnome.Sdk",
+    "command": "parsecd",
+    "finish-args": [
+        /* X11 + XShm access */
+        "--share=ipc", "--socket=x11",
+        /* Wayland access */
+        "--socket=wayland",
+        /* Needs to talk to the network: */
+        "--share=network",
+        /* Enable playing sound thru pulseaudio */
+        "--socket=pulseaudio",
+        /* Allow access to Download folder */
+        "--filesystem=~/.parsec:rw",
+        /* Enable access to dri */
+        "--device=dri",
+        /* Enable themes support */
+        "--filesystem=~/.config/dconf:ro",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        /* Required for file reveal in file manager */
+        "--socket=session-bus"
+],
+    "modules": [
+        {
+            "name": "parsecd",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D parsecd /app/bin/parsecd",
+                "install -Dm644 com.parsecgaming.parsec.desktop /app/share/applications/com.parsecgaming.parsec.desktop"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "parsecd"
+                },
+                {
+                    "type": "file",
+                    "path": "com.parsecgaming.parsec.desktop"
+                }
+            ]
+        }
+    ]
+}

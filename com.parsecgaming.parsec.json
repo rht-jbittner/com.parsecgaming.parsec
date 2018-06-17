@@ -6,6 +6,8 @@
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.26",
     "sdk": "org.gnome.Sdk",
+    "tags": ["proprietary"],
+    "separate-locales": false,
     "command": "parsecd",
     "finish-args": [
         /* X11 + XShm access */
@@ -16,8 +18,8 @@
         "--share=network",
         /* Enable playing sound thru pulseaudio */
         "--socket=pulseaudio",
-        /* Allow access to Download folder */
-        "--filesystem=~/.parsec:rw",
+        /* Allow access to parsec folder */
+        "--filesystem=~/.parsec/:rw",
         /* Enable access to dri */
         "--device=dri",
         /* Enable themes support */
@@ -32,7 +34,8 @@
             "buildsystem": "simple",
             "build-commands": [
                 "install -D parsecd /app/bin/parsecd",
-                "install -Dm644 com.parsecgaming.parsec.desktop /app/share/applications/com.parsecgaming.parsec.desktop"
+                "install -Dm644 com.parsecgaming.parsec.desktop /app/share/applications/com.parsecgaming.parsec.desktop",
+                "install -Dm644 com.parsecgaming.parsec.png /app/share/icons/hicolor/256x256/apps/com.parsecgaming.parsec.png"
             ],
             "sources": [
                 {
@@ -42,6 +45,10 @@
                 {
                     "type": "file",
                     "path": "com.parsecgaming.parsec.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "com.parsecgaming.parsec.png"
                 }
             ]
         }
